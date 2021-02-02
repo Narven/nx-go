@@ -7,7 +7,8 @@ import { runGoCommand } from '../../utils/go-utils'
 export function runBuilder(options: BuildBuilderSchema, context: BuilderContext): Observable<BuilderOutput> {
   return from(context.getProjectMetadata(context?.target?.project)).pipe(
     map((project) => {
-      const sources = `./... -v`;
+      const sources = `./... -v`
+      console.debug(project)
       return runGoCommand(context, 'test', [sources], { cwd: `${project.root}` })
     }),
   )
